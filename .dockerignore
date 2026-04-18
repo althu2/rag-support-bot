@@ -1,0 +1,12 @@
+Rsb
+venv
+__pycache__
+*.pyc
+*.pyo
+.env
+.git
+.gitignore
+data/vectorstore
+.vscode
+.idea
+.tools

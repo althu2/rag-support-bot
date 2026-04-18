@@ -1,0 +1,14 @@
+venv/
+Rsb/
+Rsb
+__pycache__/
+*.pyc
+*.pyo
+.env
+.tools/
+.render-cli.yaml
+data/vectorstore/
+*.pdf
+.DS_Store
+.idea/
+.vscode/settings.json
