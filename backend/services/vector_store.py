@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from typing import List, Optional, Any
-from langchain.schema import Document
+from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import FAISS

@@ -4,7 +4,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_core.output_parsers import StrOutputParser
-from langchain.schema import Document
+from langchain_core.documents import Document
 from backend.services.vector_store import load_vectorstore
 from backend.config import settings
 from backend.utils.logger import get_logger

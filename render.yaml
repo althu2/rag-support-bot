@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: rag-support-bot
+    runtime: python
+    pythonVersion: 3.10
+    
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash start.sh
+    
+    envVars:
+      - key: GEMINI_API_KEY
+        scope: build,runtime
+        value: ${GEMINI_API_KEY}
+      - key: OPENAI_API_KEY
+        scope: build,runtime
+        value: ${OPENAI_API_KEY}
+      - key: PORT
+        value: "8000"
+      - key: VECTORSTORE_PATH
+        value: /app/data/vectorstore
+      - key: BACKEND_HOST
+        value: 0.0.0.0
+      - key: BACKEND_PORT
+        value: "8000"
+    
+    disk:
+      name: vectorstore
+      mountPath: /app/data/vectorstore
+      sizeGB: 1
