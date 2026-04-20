@@ -40,8 +40,8 @@ class Settings(BaseSettings):
     retrieval_top_k: int = 5
 
     vectorstore_path: str = "./data/vectorstore"
-    host: str = "0.0.0.0"
-    port: int = 8000
+    backend_host: str = "127.0.0.1"
+    backend_port: int = 8001
     log_level: str = "info"
 
     class Config:
