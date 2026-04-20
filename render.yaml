@@ -21,7 +21,7 @@ services:
       - key: BACKEND_HOST
         value: 0.0.0.0
       - key: BACKEND_PORT
-        value: "8000"
+        value: "8001"
     
     disk:
       name: vectorstore
