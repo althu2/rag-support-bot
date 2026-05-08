@@ -2,7 +2,6 @@ services:
   - type: web
     name: rag-support-bot
     runtime: python
-    pythonVersion: 3.10
     
     buildCommand: pip install -r requirements.txt
     startCommand: bash start.sh
