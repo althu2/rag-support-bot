@@ -22,7 +22,4 @@ services:
       - key: BACKEND_PORT
         value: "8000"
     
-    disk:
-      name: vectorstore
-      mountPath: /app/data/vectorstore
-      sizeGB: 1
+    
