@@ -4,7 +4,7 @@ from typing import List, Tuple
 import requests
 import streamlit as st
 
-API_BASE = os.getenv("API_BASE", "http://127.0.0.1:8001")
+API_BASE = os.getenv("API_BASE", "http://127.0.0.1:8000")
 REQUEST_TIMEOUT = 60
 
 st.set_page_config(page_title="AI Customer Support Chatbot", page_icon=":speech_balloon:", layout="wide")

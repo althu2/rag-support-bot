@@ -4,7 +4,6 @@ from typing import List, Optional, Any
 from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from backend.config import settings
 from backend.utils.logger import get_logger
@@ -32,7 +31,7 @@ def _ensure_gemini_key() -> None:
 
 
 def _get_embeddings() -> Any:
-    provider = (settings.embedding_provider or "huggingface").strip().lower()
+    provider = (settings.llm_provider or "gemini").strip().lower()
 
     if provider == "openai":
         _ensure_openai_key()
@@ -47,11 +46,9 @@ def _get_embeddings() -> Any:
             model=settings.gemini_embedding_model,
             google_api_key=settings.gemini_api_key,
         )
-    
-    # Default to HuggingFace embeddings (no API key needed)
-    logger.info("Using HuggingFace embeddings (local model, no API key required)")
-    return HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
+
+    raise ValueError(
+        f"Unsupported LLM_PROVIDER '{settings.llm_provider}'. Use 'gemini' or 'openai'."
     )
 
 

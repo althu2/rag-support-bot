@@ -6,7 +6,6 @@ from langchain_core.messages import HumanMessage, AIMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.documents import Document
 from backend.services.vector_store import load_vectorstore
-from backend.services.mock_llm import rag_answer_mock
 from backend.config import settings
 from backend.utils.logger import get_logger
 
@@ -140,11 +139,6 @@ async def rag_answer(
             "answer": "I couldn't find relevant information in the uploaded documents.",
             "sources": [],
         }
-    
-    # Use mock mode if enabled or API limit exceeded
-    if settings.mock_mode:
-        logger.info("Running in MOCK MODE - no API calls, local responses only")
-        return await rag_answer_mock(question, chat_history, docs)
 
     # 3. Build prompt with history
     if _supports_system_role():
