@@ -6,7 +6,7 @@ BACKEND_HOST="${BACKEND_HOST:-127.0.0.1}"
 BACKEND_PORT="${BACKEND_PORT:-8000}"
 
 export API_BASE="${API_BASE:-http://${BACKEND_HOST}:${BACKEND_PORT}}"
-export VECTORSTORE_PATH="${VECTORSTORE_PATH:-/app/data/vectorstore}"
+export VECTORSTORE_PATH="${VECTORSTORE_PATH:-./data/vectorstore}"
 
 mkdir -p "${VECTORSTORE_PATH}"
 

@@ -25,7 +25,7 @@ _sanitize_broken_proxy_env()
 
 
 class Settings(BaseSettings):
-    llm_provider: str = "gemini"
+    llm_provider: str = "apifreellm"
 
     openai_api_key: str = ""
     openai_chat_model: str = "gpt-4o-mini"
@@ -34,6 +34,8 @@ class Settings(BaseSettings):
     gemini_api_key: str = ""
     gemini_chat_model: str = "gemini-2.0-flash"
     gemini_embedding_model: str = "models/gemini-embedding-001"
+    
+    apifree_api_key: str = ""
 
     chunk_size: int = 800
     chunk_overlap: int = 150
