@@ -121,7 +121,51 @@ def add_documents_to_store(documents: List[Document]) -> FAISS:
 
     logger.info(f"Adding {len(documents)} chunks to existing FAISS index...")
     embeddings = _get_embeddings()
-    existing.add_documents(documents)
+
+    # Ensure embedding dimensionality matches the existing index.
+    # Compute one sample embedding and compare lengths; if they differ,
+    # the stored FAISS index was built with a different embedding model.
+    try:
+        sample_vec = embeddings.embed_documents(["test"])[0]
+        new_dim = len(sample_vec)
+    except Exception:
+        # Fallback: try embed_query
+        try:
+            sample_vec = embeddings.embed_query("test")
+            new_dim = len(sample_vec)
+        except Exception:
+            new_dim = None
+
+    try:
+        existing_dim = getattr(existing.index, "d", None)
+    except Exception:
+        existing_dim = None
+
+    if new_dim and existing_dim and new_dim != existing_dim:
+        logger.warning(
+            f"Embedding dimension mismatch (existing={existing_dim}, new={new_dim}). "
+            "Removing old index and rebuilding with new embeddings."
+        )
+        # Remove persisted vectorstore and rebuild from given documents only.
+        store_path = Path(settings.vectorstore_path)
+        try:
+            for child in store_path.iterdir():
+                if child.is_file():
+                    child.unlink()
+                else:
+                    # Remove directories recursively
+                    import shutil
+
+                    shutil.rmtree(child)
+        except Exception:
+            logger.exception("Failed to clean existing vectorstore files; aborting.")
+            raise ValueError("Failed to reset vectorstore. Check permissions and retry.")
+
+        # Build a fresh index using the new embeddings and provided documents.
+        return build_vectorstore(documents)
+
+    try:
+        existing.add_documents(documents)
     try:
         existing.save_local(settings.vectorstore_path)
     except PermissionError as exc:
