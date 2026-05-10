@@ -164,8 +164,7 @@ def add_documents_to_store(documents: List[Document]) -> FAISS:
         # Build a fresh index using the new embeddings and provided documents.
         return build_vectorstore(documents)
 
-    try:
-        existing.add_documents(documents)
+    existing.add_documents(documents)
     try:
         existing.save_local(settings.vectorstore_path)
     except PermissionError as exc:
