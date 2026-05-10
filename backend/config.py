@@ -33,7 +33,7 @@ class Settings(BaseSettings):
 
     gemini_api_key: str = ""
     gemini_chat_model: str = "gemini-2.0-flash"
-    gemini_embedding_model: str = "models/text-embedding-004"
+    gemini_embedding_model: str = "models/gemini-embedding-2"
 
     chunk_size: int = 800
     chunk_overlap: int = 150
