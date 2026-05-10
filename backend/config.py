@@ -33,7 +33,13 @@ class Settings(BaseSettings):
 
     gemini_api_key: str = ""
     gemini_chat_model: str = "gemini-2.0-flash"
-    gemini_embedding_model: str = "models/text-embedding-004"
+    gemini_embedding_model: str = "text-embedding-3-small"
+    
+    # Embedding provider: "huggingface" (default, local), "openai", or "gemini"
+    embedding_provider: str = "huggingface"
+    
+    # Mock mode: if True, uses local responses without API calls
+    mock_mode: bool = False
 
     chunk_size: int = 800
     chunk_overlap: int = 150
